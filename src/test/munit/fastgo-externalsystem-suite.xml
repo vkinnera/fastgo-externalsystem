@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="fastgo-externalsystem-suite.xml" />
+	<munit:test name="fastgo-externalsystemFlow-test" doc:id="966ab000-0261-4cff-a307-8e0a0e20c485" >
+		<munit:execution >
+			<munit:set-event doc:name="Set Input" doc:id="a579d1e0-9eb2-403c-911e-3449c948f412">
+				<munit:payload value="#[readUrl('classpath://fastgoexternalsystemFlowtest\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://fastgoexternalsystemFlowtest\set-event_attributes.dwl')]" />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to fastgo-externalsystemFlow" doc:id="78675ffe-90c4-4b89-a7ad-ec3881f2ba9d" name="fastgo-externalsystemFlow"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert doc:name="Assert payload" doc:id="d4533962-e31a-4d78-af34-1b300e810e49" message="The payload does not match">
+				<munit-tools:that><![CDATA[#[%dw 2.0
+import fastgoexternalsystemFlowtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="fastgo-externalsystemFlow-test1" doc:id="ad16948c-20f6-4b81-be05-a2187926ebe2" >
+		<munit:behavior >
+			<munit:set-event doc:name="Set Input" doc:id="dac7bb54-c0c1-4ef6-8241-e41f7d8e1c20" >
+				<munit:payload value="#[readUrl('classpath://fastgoexternalsystemFlowtest1\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://fastgoexternalsystemFlowtest1\set-event_attributes.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to fastgo-externalsystemFlow" doc:id="c85b8a24-6323-446f-a57d-b9ec148176ef" name="fastgo-externalsystemFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="1c437ccf-cb9e-43ea-804e-830b2081c40c" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import fastgoexternalsystemFlowtest1::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="fastgo-externalsystemFlow-test2" doc:id="31373985-6009-4499-a6f9-281a5602dea6" >
+		<munit:execution >
+			<munit:set-event doc:name="Set Input" doc:id="91be0cd8-d818-4c5d-bcad-c39dd508b28d">
+				<munit:payload value="#[readUrl('classpath://fastgoexternalsystemFlowtest2\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://fastgoexternalsystemFlowtest2\set-event_attributes.dwl')]" />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to fastgo-externalsystemFlow" doc:id="14a286b5-b76f-4ec6-b13f-ea7aa95072d8" name="fastgo-externalsystemFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="99125743-cf87-43b9-9f53-6fa59c06b54a" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import fastgoexternalsystemFlowtest2::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
